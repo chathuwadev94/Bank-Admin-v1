@@ -1,0 +1,215 @@
+<!-- Header_Line -->
+<div class="row">
+    <!-- Left_Side_Buttons -->
+    <div class="col-md-7">
+        <div class="col-sm-12 row" *ngIf=paginationShow>
+            <pagination (pageChanged)="onPageChange($event)" [(ngModel)]="gridConfig.pagination.bigCurrentPage"
+                        [boundaryLinks]="true" [itemsPerPage]="gridConfig.pagination.itemsPerPage"
+                        [maxSize]="gridConfig.pagination.maxSize" [rotate]="false"
+                        [totalItems]="gridConfig.pagination.bigTotalItems"
+                        [nextText]="'Next'" [previousText]="'Previous'"
+                        [firstText]="'First'" [lastText]="'Last'"
+                        class="pagination-sm mr-1 p-0"></pagination>
+
+            <span class="paginationSpan mr-1">show</span>
+
+
+            <select (ngModelChange)="onChangePagination($event);"
+                    [(ngModel)]="selectedPagination" class="mr-1 form-control-sm">
+                <option [ngValue]="10">10</option>
+                <option [ngValue]="25">25</option>
+                <option [ngValue]="50">50</option>
+                <option [ngValue]="100">100</option>
+            </select>
+
+            <span class="paginationSpan mr-1">entries</span>
+        </div>
+    </div>
+    <!-- Right_coner_buttond -->
+    <div class="col-md-5 text-right">
+        <label class="mr-2" style="color: #0275d8;">(Total Items {{gridConfig.pagination.bigTotalItems}})</label>
+
+        <!-- Refresh_Button -->
+        <button (click)="onClickRefresh();" class="btn btn-primary btn-sm mr-1" type="button">
+            <i aria-hidden="true" class="fa fa-sync"></i> Refresh
+        </button>
+        <!-- Clear_Filter_Button -->
+        <button (click)="onClickClear();" class="btn btn-info btn-sm mr-1" type="button">
+            <i aria-hidden="true" class="fa fa-trash"></i> Clear Filter
+        </button>
+        <!-- Save_Excell_Button -->
+        <button (click)="onClickSaveExcel();" *ngIf="gridConfig.elsxBtn" class="btn btn-success btn-sm mr-1"
+                type="button">
+            <i aria-hidden="true" class="fa fa-file-excel-o"></i></button>
+        <!-- Print_Button -->
+        <button (click)="onClickPrint();" *ngIf="gridConfig.printBtn" class="btn btn-primary btn-sm mr-1" type="button">
+            <i aria-hidden="true" class="fa fa-print"></i></button>
+    </div>
+</div>
+
+    <!-- Print_Section -->
+<div id="print-section" class="printable">
+    <app-print-view [gridConfig]="gridConfig" [objectList]="objectList"
+                    [formattedData]="formattedData"></app-print-view>
+</div>
+
+    <!-- Table -->
+<table class="table table-bordered table-striped table-sm text-left grid-table">
+    
+    <!-- Table_Header -->
+    <thead>
+    <tr>
+        <!-- Set_Table_Columns -->
+        <th *ngFor="let column of gridConfig.columns;" [ngClass]="column.headerClass?column.headerClass:'text-left'">
+            <!-- Column's_Sort_Button -->
+            <span *ngIf="column?.sort" style="cursor:pointer" (click)="onClickSortBtn(column);">
+                <i class="fa fa-sort"
+                 [ngClass]="column.sortConfig.value==='asc'?'fa-sort-down':column.sortConfig.value==='desc'?'fa-sort-up':'fa-sort'"
+                 aria-hidden="true" [style.color]="column.tdClass?column.tdClass: ''"></i> &nbsp;
+             </span>
+             <!-- Column_Name -->
+            <span>{{column.name}}</span>
+
+            <input *ngIf="column.columnType === 'checkbox'" type="checkbox" (change)="onChangeCheckAllRows()"
+                   [(ngModel)]="gridConfig.checkAllRows">
+             <!-- Column_Filter_Icon       -->
+            <span *ngIf="column?.filter;" #FilterBoxList>
+
+            <!-- Column_Filter_Dropdown    -->
+            <div class="btn-group filter-dropdown" dropdown [autoClose]="false" [isOpen]="column.filterPanelOpen"
+                 (isOpenChange)="onChangeFilterDropDown($event,column)" style="margin-top: -5px;">
+                 <span dir="rtl"> [
+                      <a href="javascript:void(0);" class="dropdown-toggle" (click)="onClickOpenFilter(column);"
+                         dropdownToggle [ngClass]="column.filtered?'active':''">
+                         <i style="font-size: 12px;" class="fa-1x fa fa-filter" aria-hidden="true"></i>
+                      </a>
+                  ] </span>
+               <!-- Column_Filter_Dropdown    -->
+              <div *dropdownMenu class="dropdown-menu p-2"
+                   [ngClass]="column.filterDropDownRight?'dropdown-menu-right':''" role="menu">
+                     <div class="row">
+                         <div class="col-md-12 pb-1">
+                             <!-- Column_Filter_Conditions_Dropdown -->
+                              <select id="select" name="select" class="form-control form-control-sm"
+                                    [(ngModel)]="column.filterConfig.defaultOperator">
+                                        <option *ngIf="column.filterConfig?.operators.like" value="like">LIKE</option>
+                                         <option *ngIf="column.filterConfig?.operators.eq" value="eq">EQUAL</option>
+                                         <option *ngIf="column.filterConfig?.operators.not_eq" value="ne">NOT EQUAL</option>
+                                        <option *ngIf="column.filterConfig?.operators.gt" value="gt">GREATER THAN</option>
+                                         <option *ngIf="column.filterConfig?.operators.gte" value="gte">GREATER THAN OR EQUAL</option>
+                                         <option *ngIf="column.filterConfig?.operators.lt" value="lt">LESS THAN</option>
+                                         <option *ngIf="column.filterConfig?.operators.lte" value="lte">LESS THAN OR EQUAL</option>
+                             </select>
+                            </div>
+                    <!-- Column_Filter_Values -->
+                  <div class="col-md-12 pb-2">
+                    <span [ngSwitch]="column.filterConfig.type">
+                        <!-- Column_Filter_Values_Dropdown -->
+                        <select *ngSwitchCase="'option'" class="form-control form-control-sm" [(ngModel)]="column.filterConfig.value">
+                             <option value=""> - Select - </option>
+                            <option *ngFor="let option of column.filterConfig.options;" value="{{option.key}}">{{option.value}}</option>
+                        </select>
+                        <!-- Column_Filter_Value_Input -->
+                        <input *ngSwitchCase="'date'" [(ngModel)]="column.filterConfig.value"
+                             autocomplete="off" id="DateTime"
+                             class="form-control form-control-sm" type="date">
+
+                        <input *ngSwitchDefault [(ngModel)]="column.filterConfig.value"
+                             type="{{column.filterConfig.type?column.filterConfig.type:'text'}}"
+                             class="form-control form-control-sm">
+                    </span>
+                  </div>
+                  <!-- Filter_Button -->
+                  <div class="col-md-6 pr-2 btn-filter">
+                        <button type="button" class="btn btn-success btn-block btn-sm"
+                            (click)="onClickFilterBtn($event,column);">Filter</button>
+                  </div>
+                  <!-- Filter_Clear_Button -->
+                  <div class="col-md-6 pl-2 btn-clear">
+                     <button type="button" class="btn btn-secondary btn-block btn-sm"
+                            (click)="onClickFilterClearBtn($event,column);">Clear</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </span>
+        </th>
+    </tr>
+    </thead>
+
+    <!-- Table_Body -->
+    <tbody>
+        <!-- Table_Record_Load -->
+         <ng-container *ngIf="(gridConfig?.records.length > 0)">
+             <!-- Get_Records -->
+            <tr *ngFor="let record of gridConfig.records; let i = index" [ngClass]="record.trClass? record.trClass : '' ">
+                 <td *ngFor="let column of gridConfig.columns" [ngClass]="column.tdClass" [attr.width]="column.width"[ngStyle]='column.dataStyle?column.dataStyle : null '>
+                    <!-- Check_Column_Type -->
+                    <span [ngSwitch]="column.columnType">
+                        <!-- Column_Type_Checkbox -->
+                         <input *ngSwitchCase="'checkbox'" type="checkbox" [(ngModel)]="record.check" (change)="onChangeRowCheckBox($event, record)">
+                        <!-- Column_Type_Image -->
+                        <img *ngSwitchCase="'image'" attr.src="{{record[column.key]}}" alt="no image" class="img-thumbnail">
+                        <!-- Column_Type_Button -->
+                         <span *ngSwitchCase="'button'">
+                             <button *ngIf="!column.buttonConfig.type" title="{{column.buttonConfig.name}}" type="button"
+                                  [disabled]="column.buttonConfig.disabledCondition?(column.buttonConfig.disabledCondition.values.indexOf(record[column.buttonConfig.disabledCondition.key]) > -1) : false"
+                                  [hidden]="column.buttonConfig.hiddenCondition?(column.buttonConfig.hiddenCondition.values.indexOf(record[column.buttonConfig.hiddenCondition.key]) > -1) : false"
+                                 class="btn action-btn btn-sm"
+                                 [ngClass]="column.buttonConfig.class?column.buttonConfig.class:'btn-default'"
+                                (click)="onClickActionBtn(column.buttonConfig.action,record);">
+                                 <i *ngIf="!column.buttonConfig.twoIcons" [ngClass]="column.buttonConfig.icon?column.buttonConfig.icon:''"></i>
+                               <i *ngIf="column.buttonConfig.twoIcons"
+                                [ngClass]="(column.buttonConfig.condition.values.indexOf(record[column.buttonConfig.condition.key]) > -1)? (column.buttonConfig.icon2):(column.buttonConfig.icon1)"></i>
+                              </button>
+
+                             <div *ngIf="column.buttonConfig.type === 'menu'" class="btn-group" dropdown>
+                                <button dropdownToggle type="button" placement="bottom right"
+                                  aria-controls="dropdown-disabled-menu" title="{{column.buttonConfig.name}}"
+                                 [disabled]="column.buttonConfig.disabledCondition?(column.buttonConfig.disabledCondition.values.indexOf(record[column.buttonConfig.disabledCondition.key]) > -1) : false"
+                                 [hidden]="column.buttonConfig.hiddenMenuBtn?(column.buttonConfig.hiddenMenuBtn == record.hiddenMenuBtn) : false"
+                                 class="btn action-btn btn-sm dropdown-toggle "
+                                 [ngClass]="column.buttonConfig.class?column.buttonConfig.class:'btn-default'">
+                                 <i [ngClass]="column.buttonConfig.icon?column.buttonConfig.icon:''"></i>
+                                 </button>
+                                <!--[class.dropdown-menu-right]="!column.leftDropDown"-->
+                                 <!--[class.dropdown-menu-left]="column.leftDropDown"-->
+                         <ul id="dropdown-disabled-menu" *dropdownMenu class="dropdown-menu dropdown-menu-right"
+                                role="menu" aria-labelledby="button-disabled-menu">
+                             <li role="menuitem" *ngFor="let menu of column.buttonConfig.menus || []">
+                                  <a class="dropdown-item" href="javascript:void(0)" *ngIf="menu.accessRole"
+                                    (click)="onClickActionBtn(menu.action,record);"
+                                    [hidden]="menu.hiddenCondition?(menu.hiddenCondition.values.indexOf(record[menu.hiddenCondition.key]) > -1) : false"
+                                     [class.disabled]="menu.disabledCondition?(menu.disabledCondition.values.indexOf(record[menu.disabledCondition.key]) > -1) : false">
+                                     <i [ngClass]="menu.icon?menu.icon:''" [ngStyle]="menu.style?menu.style:{}"></i> {{menu.name}}
+                                     </a>
+                             </li>
+                         </ul>
+            </div>
+                        </span>
+                        <!-- Column_Type_Deafault -->
+                         <span *ngSwitchDefault [ngStyle]="record.row[column.key].style" dir="auto">
+                            <span>{{record.row[column.key].value}}</span>
+                        </span>
+                     </span>
+                 </td>
+            </tr>
+        </ng-container>
+
+        <!-- Buffer -->
+         <tr *ngIf="gridConfig.waitingHttpSve">
+             <td attr.colspan="{{gridConfig.columns.length}}" style="text-align: center">
+                <i *ngFor="let column of gridConfig.columns" class="fa fa-spinner fa-pulse"></i>
+            </td>
+         </tr>
+
+         <!-- Records_NotFound_Row -->
+         <tr *ngIf="!(gridConfig.records?.length > 0) && !(gridConfig.waitingHttpSve)">
+        <td attr.colspan="{{gridConfig.columns.length}}" style="text-align: center">no record found !</td>
+         </tr>
+
+    </tbody>
+
+
+</table>
+

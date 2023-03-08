@@ -1,0 +1,20 @@
+
+  <h2>
+    {{gridConfig.tableName}}
+  </h2>
+  <table class="print-table">
+    <thead>
+    <tr>
+      <th class="print-table" *ngFor="let column of objectList">
+        {{column}}
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let record of formattedData; let i = index">
+      <td class="print-table" *ngFor="let column of objectList" >
+        {{record[column]}}
+      </td>
+    </tr>
+    </tbody>
+  </table>

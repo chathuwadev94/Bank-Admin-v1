@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-3" *ngIf="uploadedUrl== null;">
+                <label [for]="'file-' + config.Header" *ngIf="!uploadSpinner">
+                    <i class="fa fa-upload fa-2x" style="color:#000000;cursor: pointer" aria-hidden="true"></i>
+                </label>
+                <label *ngIf="uploadSpinner" class="spinner-border" role="status"></label>
+                <input type="file" class="form-control form-control-sm"
+                       style="display:none" accept="image/*"
+                       [id]="'file-' + config.Header" (change)="onChooseFile($event)">
+            </div>
+
+            <div class="col-sm-6 pr-0">
+                <div *ngIf="uploadedUrl!= null;"
+                     style="height: 65px;overflow: hidden;display: inline-block;position: relative;">
+                    <button style="position:absolute;right:0;top:0;" type="button"
+                            class="btn btn-outline btn-sm py-0 px-1 bg-light text-danger"
+                            (click)="onDeleteImg();"><i
+                        class="fa fa-times fa-xs"></i></button>
+                    <img *ngIf="uploadedUrl != null" [src]="uploadedUrl" style="height: 100%;"
+                         alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

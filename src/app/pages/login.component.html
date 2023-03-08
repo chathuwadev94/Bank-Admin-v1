@@ -1,0 +1,154 @@
+<carousel [noPause]="noPause" class="loginSlider">
+    <div class="carousel-caption login-page">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-sm-10 col-md-8 col-lg-6 col-xl-4">
+                    <div class="card rounded-0">
+                        <div class="card-header d-flex flex-column">
+                            <div class="logo-image mb-2">
+                                <img src="assets/images/bank10.png" class="user-avatar img-fluid"/>
+                            </div>
+                            <!-- <h6 class="text-center">SS-INVESTMENT  Terminal</h6> -->
+                        </div>
+                        <div class="card-body pt-0 px-3">
+                            <div class="row" *ngIf="!showForgotPsw">
+                                <div class="col-12">
+                                    <form role="form" (ngSubmit)="onLoggedIn(f_login)" #f_login="ngForm" novalidate>
+                                        <div class="row">
+                                            <div class="form-content col-lg-12">
+                                                <div class="form-group mb-1 mt-3">
+                                                    <input type="text" class="form-control"
+                                                           required
+                                                           placeholder="Username" [(ngModel)]="loginReq.loginName"
+                                                           name="loginName" #loginName="ngModel" />
+                                                    <span>
+                                                        <i class="fa fa-user" aria-hidden="true"> </i>
+                                                    </span>
+                                                </div>
+                                                <div
+                                                    *ngIf="loginName.invalid && (f_login.submitted || loginName.dirty || loginName.touched)"
+                                                    class="required-alert alert alert-danger">
+                                                    <span
+                                                        *ngIf="loginName?.errors?.required">This field is required.</span>
+                                                </div>
+
+                                                <div class="form-group mb-1 mt-3">
+                                                    <input type="password" class="form-control"
+                                                           required
+                                                           placeholder="Password" [(ngModel)]="loginReq.password"
+                                                           name="password" #password="ngModel">
+                                                    <span>
+                                                        <i class="fa fa-lock" aria-hidden="true"> </i>
+                                                    </span>
+                                                </div>
+                                                <div
+                                                    *ngIf="password.invalid && (f_login.submitted || password.dirty || password.touched)"
+                                                    class="required-alert alert alert-danger">
+                                                    <span
+                                                        *ngIf="password?.errors?.required">This field is required.</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <button type="submit" class="btn float-right mt-2 px-5 text-uppercase">
+                                                    <span *ngIf="toggle" aria-hidden="true"
+                                                          class="spinner-border spinner-border-sm mr-2"
+                                                          role="status"></span>Sign in
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <a class="btn btn-link btn-block forgot-pw mt-4"
+                                            (click)="onClickForgotPsw()"><i class="fa fa-exclamation-triangle mr-2"></i> Forgot password?
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="showForgotPsw">
+                                <div class="col-12">
+                                    <form role="form" (ngSubmit)="onForgotPassword(f)" #f="ngForm">
+                                        <div class="form-group mb-1 mt-3">
+                                            <input (ngModelChange)="onEnterValue('email')" type="text"
+                                                   class="form-control"
+                                                   placeholder="Email" [(ngModel)]="loginReq.email"
+                                                   name="email" #email="ngModel" email [required]="required">
+                                            <span>
+                                                <i class="far fa-envelope"></i>
+                                            </span>
+                                        </div>
+                                        <div *ngIf="email.invalid && (f.submitted || email.dirty || email.touched)"
+                                             class="required-alert alert alert-danger">
+                                            <span *ngIf="email?.errors?.required">This field is required.</span>
+                                            <span
+                                                *ngIf="email?.errors?.email">Email must be a valid email address.</span>
+                                        </div>
+                                        <h6 class="text-white pt-1 font-weight-normal">- OR -</h6>
+                                        <div class="form-group mb-1 mt-2">
+                                            <input (ngModelChange)="onEnterValue('username')" type="text"
+                                                   class="form-control"
+                                                   placeholder="Username" [(ngModel)]="loginReq.userName"
+                                                   name="userName" #userName="ngModel" [required]="!required">
+                                            <span>
+                                                <i class="far fa-user" aria-hidden="true"> </i>
+                                            </span>
+                                        </div>
+
+                                        <div *ngIf="userName.invalid && (f.submitted || userName.touched)"
+                                             class="required-alert alert alert-danger">
+                                            <span *ngIf="userName?.errors?.required">This field is required.</span>
+                                        </div>
+
+                                        <div class="row justify-content-center mb-3">
+                                            <div class="pt-3 pb-2 px-4 mt-3 txt-captcha">
+                                                <h4 style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none;
+                            user-select:none; -o-user-select:none;" unselectable="on">{{text}}</h4></div>
+                                            </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control"
+                                                   placeholder="{{ 'Please Enter above Captcha'  }}"
+                                                   [(ngModel)]="loginReq.captcha"
+                                                   name="captcha" #captcha="ngModel" pattern="{{text}}" required>
+                                            <span>
+                                                <i class="fa fa-check" aria-hidden="true"> </i>
+                                            </span>
+                                        </div>
+                                        <div *ngIf="captcha.invalid && (f.submitted)"
+                                             class="required-alert alert alert-danger">
+                                    <span
+                                        *ngIf="captcha?.errors?.pattern || captcha?.errors?.required">Wrong captcha.</span>
+                                        </div>
+                                        <div class="d-flex">
+                                            <button type="submit" class="flex-fill btn mr-2">
+                                                <span *ngIf="toggleReset" aria-hidden="true"
+                                                      class="spinner-border spinner-border-sm"
+                                                      role="status"></span>Request Password
+                                            </button>
+                                            <button type="button" class="flex-fill btn"
+                                                    [disabled]="toggleReset"
+                                                    (click)="onClickCancel()">Cancel
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <slide>
+        <div class="loginSliderImage" style="background-image: url('assets/images/travel/slide-06.jpg');"></div>
+    </slide>
+    <slide>
+        <div class="loginSliderImage" style="background-image: url('assets/images/travel/slide-07.jpg');"></div>
+    </slide>
+</carousel>
+<div class="copyrightFooterWrap">
+    <div class="float-md-left text-center text-md-left mb-1">
+        <span class="ml-auto">Powered by <a href="http/">Singhe Sun Investment (Pvt) Ltd</a></span>
+    </div>
+    <!-- <div class="float-md-right text-center text-md-right mb-1">Developed by <a href="http://www.mutants.lk/" target="_blank">Mutants International</a> (Pvt) Ltd. </div> -->
+    <div class="float-md-right text-center text-md-right mb-1">
+        <span><a href="http/">cSaLABS</a> Privacy Policy; 2021  All rights reserved ©  cSaLABS </span>
+    </div>
+    
+</div>

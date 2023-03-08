@@ -1,0 +1,62 @@
+$topnav-background-color: #3c3c3c;
+
+.navbar {
+    background-color: $topnav-background-color;
+    border-bottom: 1px solid #000;
+    height: 56px;
+    .nav-item > a {
+        color: #fff;
+        &:hover {
+            color: #fff;
+        }
+    }
+    .dropdown-menu {
+        position: absolute;
+        right: 0;
+        left: auto;
+    }
+}
+.messages {
+    width: 300px;
+    .media {
+        border-bottom: 1px solid #ddd;
+        padding: 5px 10px;
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+    .media-body {
+        h5 {
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .small {
+            margin: 0;
+        }
+        .last {
+            font-size: 12px;
+            margin: 0;
+        }
+    }
+}
+
+.notifications {
+    i {
+        font-size: 17px;
+    }
+    span {
+        width: 15px;
+        height: 15px;
+        font-size: 9px;
+        line-height: 15px;
+        top: 7px;
+        left: 19px;
+    }
+}
+@media screen and (max-width: 640px) {
+    .navbar-brand {
+        img {
+            max-width: 170px;
+        }
+    }
+}

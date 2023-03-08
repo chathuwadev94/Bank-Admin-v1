@@ -1,0 +1,22 @@
+
+@media print {
+  .printable {
+    display: block;
+  }
+
+  .non-printable {
+    display: none;
+  }
+
+  .print-table {
+    border: 1px solid black;
+  }
+}
+
+@media screen {
+  .printable { display: none; }
+  .non-printable { display: block; }
+  .print-table {
+    border: 1px solid black;
+  }
+}

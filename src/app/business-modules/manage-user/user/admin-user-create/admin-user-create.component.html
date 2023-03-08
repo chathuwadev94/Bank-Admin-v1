@@ -1,0 +1,208 @@
+<div ngDraggable [handle]="DemoHandle" class="animated fadeIn modal-draggable">
+    <div #DemoHandle class="modal-header">
+        <h6 class="modal-title pull-left">{{action === 'add_user' ? 'Add User' : 'Edit User'}}</h6>
+        <button class="close pull-right" aria-label="Close" (click)="onCloseModal(null)" type="button"
+                [disabled]="spinner" tabindex="15">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form [formGroup]="formGroup" novalidate *ngIf="formGroup" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+
+
+
+            <div class="row">
+
+
+
+                <div class="col-lg-6 mb-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="nameSpan">Basic Information</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-sm">
+                                            <label>First Name<span class="required-field">*</span></label>
+                                            <input type="text" class="form-control form-control-sm" tabindex="1"
+                                                   formControlName="firstName" id="fName" [focuMe]="true" />
+                                            <div class="alert alert-danger required-alert"
+                                                 *ngIf="formGroup.controls['firstName'].touched && formGroup.controls['firstName'].hasError('required')">
+                                                This field is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-sm">
+                                            <label>Middle Name</label>
+                                            <input type="text" class="form-control form-control-sm" tabindex="2"
+                                                   formControlName="middleName" id="mName"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-sm">
+                                            <label>Last Name<span class="required-field">*</span></label>
+                                            <input type="text" class="form-control form-control-sm" tabindex="3"
+                                                   formControlName="lastName" id="lName"/>
+                                            <div class="alert alert-danger required-alert"
+                                                 *ngIf="formGroup.controls['lastName'].touched && formGroup.controls['lastName'].hasError('required')">
+                                                This field is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-sm">
+                                            <label>Gender</label>
+                                            <select class="form-control form-control-sm" formControlName="gender"
+                                                    tabindex="4">
+                                                <option [ngValue]="null" disabled>Select a Gender</option>
+                                                <option [ngValue]="gender.value"
+                                                        *ngFor="let gender of genders">{{gender.key}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                            <div class="form-group form-group-sm">
+                                                <label>Address</label>
+                                                <input type="text" class="form-control form-control-sm" tabindex="2"
+                                                       formControlName="address" id="address"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group form-group-sm">
+                                                <label>NIC<span class="required-field">*</span></label>
+                                                <input type="text" class="form-control form-control-sm" tabindex="3"
+                                                       formControlName="NIC" id="NIC"/>
+                                                <div class="alert alert-danger required-alert"
+                                                     *ngIf="formGroup.controls['NIC'].touched && formGroup.controls['NIC'].hasError('required')">
+                                                    This field is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="nameSpan">Contact Details</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group form-group-sm">
+                                        <label>Mobile<span class="required-field">*</span></label>
+                                        <input type="text" class="form-control form-control-sm" tabindex="7"
+                                               formControlName="mobile" id="mobile"/>
+                                        <div class="alert alert-danger required-alert"
+                                             *ngIf="formGroup.controls['mobile'].touched && formGroup.controls['mobile'].hasError('required')">
+                                            This field is required
+                                        </div>
+                                        <div class="alert alert-danger required-alert"
+                                             *ngIf="formGroup.controls['mobile'].touched && formGroup.controls['mobile'].hasError('pattern')">
+                                            wrong
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group form-group-sm">
+                                        <label>Telephone</label>
+                                        <input type="text" class="form-control form-control-sm" tabindex="8"
+                                               formControlName="contact" id="contact"/>
+                                        <div class="alert alert-danger required-alert"
+                                             *ngIf="formGroup.controls['contact'].touched && formGroup.controls['contact'].hasError('pattern')">
+                                            wrong
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group form-group-sm">
+                                        <label>E-Mail</label>
+                                        <input type="email" class="form-control form-control-sm" tabindex="9"
+                                               formControlName="email" id="email"/>
+                                        <div class="alert alert-danger required-alert"
+                                             *ngIf="formGroup.controls['email'].touched && formGroup.controls['email'].hasError('email')">
+                                            E-Mail is not valid
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="row" *ngIf="action === 'add_user'">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="nameSpan">Login Details</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group form-group-sm">
+                                        <label>Login Name<span class="required-field">*</span></label>
+                                        <input type="text" class="form-control form-control-sm" tabindex="10"
+                                               formControlName="username" id="logName"/>
+                                        <div class="alert alert-danger required-alert"
+                                             *ngIf="formGroup.controls['username'].touched && formGroup.controls['username'].hasError('required')">
+                                            This field is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group form-group-sm">
+                                        <label>Password<span class="required-field">*</span></label>
+                                        <input type="password" class="form-control form-control-sm" tabindex="11"
+                                               formControlName="password" id="password"/>
+                                        <div class="alert alert-danger required-alert"
+                                             *ngIf="formGroup.controls['password'].touched && formGroup.controls['password'].hasError('required')">
+                                            This field is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group form-group-sm">
+                                        <label>Confirm Password<span class="required-field">*</span></label>
+                                        <input type="password" class="form-control form-control-sm" tabindex="12"
+                                               formControlName="cPassword" id="cPassword"/>
+                                        <div class="alert alert-danger required-alert"
+                                             *ngIf="formGroup.controls['cPassword'].touched && formGroup.controls['cPassword'].hasError('required')">
+                                            This field is required
+                                        </div>
+                                        <div class="alert alert-danger required-alert"
+                                             *ngIf="formGroup.controls['cPassword'].touched && formGroup.controls['cPassword'].hasError('matchError')">
+                                            Password not matched
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-sm btn-success" [disabled]="spinner" tabindex="13">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="spinner"></span>
+                {{action == "edit_user" ? "Save" : "Create"}}
+            </button>
+            <button type="button" (click)="onCloseModal(null);" class="btn btn-sm btn-secondary" [disabled]="spinner"
+                    tabindex="14">Cancel
+            </button>
+        </div>
+    </form>
+</div>

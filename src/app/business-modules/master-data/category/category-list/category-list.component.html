@@ -1,0 +1,15 @@
+<div class="animated fadeIn" >
+    <div class="card">
+        <div class="card-header">
+            <span class="nameSpan float-left"><i class="fa fa-align-justify"></i> Categories</span>
+            <div class="form-inline float-right">
+                <button class="btn btn-sm btn-primary" type="button"
+                        (click)="onClickAddBtn()">Add New</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <app-data-grid [gridOnChangeTime]="gridOnChangeTime" [gridEvent]="gridEvent" [gridConfig]="gridConfig"
+                           (onGridActionEvent)="onGridActionEvent($event)"></app-data-grid>
+        </div>
+    </div>
+</div>

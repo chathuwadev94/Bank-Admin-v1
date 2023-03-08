@@ -1,0 +1,93 @@
+<div ngDraggable [handle]="DemoHandle" class="animated fadeIn modal-draggable">
+    <div #DemoHandle class="modal-header">
+        <h6 class="modal-title pull-left">Customer Details</h6>
+        <button class="close pull-right" aria-label="Close" (click)="onCloseModal({})">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-6 mb-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="nameSpan">Basic Information</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <dt class="col-5">Customer No</dt>
+                                <dd class="col-7">: {{customerObj.custNo}}</dd>
+                                <dt class="col-5">First Name</dt>
+                                <dd class="col-7">: {{customerObj.firstName}}</dd>
+                                <dt class="col-5">Last Name</dt>
+                                <dd class="col-7">: {{customerObj.lastName}}</dd>
+                                <dt class="col-5">Address</dt>
+                                <dd class="col-7">: {{customerObj.address}}</dd>
+                                <dt class="col-5">Gender</dt>
+                                <dd class="col-7">: {{customerObj.gender === 'M' ? 'Male' : 'Female'}}</dd>
+                                <dt class="col-5">NIC</dt>
+                                <dd class="col-7">: {{customerObj.NIC || 'N/A'}}</dd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="nameSpan">Contact Details</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <dt class="col-5">Mobile</dt>
+                                <dd class="col-7">: {{customerObj.mobileNo}}</dd>
+                                <dt class="col-5">Telephone</dt>
+                                <dd class="col-7">: {{customerObj.contactNo || 'N/A'}}</dd>
+                                <dt class="col-5">Email</dt>
+                                <dd class="col-7">:{{customerObj.email || 'N/A'}}</dd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="nameSpan">Profession Details</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <dt class="col-5">Profession</dt>
+                                <dd class="col-7">: {{customerObj.profession || 'N/A'}}</dd>
+                                <dt class="col-5">Profession Address</dt>
+                                <dd class="col-7">: {{customerObj.professionAddress || 'N/A' }}</dd>
+                                <dt class="col-5">Profession Contact</dt>
+                                <dd class="col-7">: {{customerObj.professionContact || 'N/A' }}</dd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="nameSpan">Spouse Details</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <dt class="col-5">Spouse Name</dt>
+                                <dd class="col-7">: {{customerObj.spouseName || 'N/A'}}</dd>
+                                <dt class="col-5">Spouse NIC</dt>
+                                <dd class="col-7">: {{customerObj.spouseNIC || 'N/A'}}</dd>
+                                <dt class="col-5">Spouse Contact</dt>
+                                <dd class="col-7">: {{customerObj.spouseContactNo || 'N/A'}}</dd>
+                                <dt class="col-5">Spouse Profession</dt>
+                                <dd class="col-7">: {{customerObj.spouseProfession || 'N/A'}}</dd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" (click)="onCloseModal({});" class="btn btn-sm btn-secondary">Close</button>
+    </div>
+</div>

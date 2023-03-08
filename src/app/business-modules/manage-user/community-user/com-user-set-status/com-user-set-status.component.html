@@ -1,0 +1,32 @@
+<div ngDraggable [handle]="DemoHandle" class="animated fadeIn modal-draggable">
+    <div #DemoHandle class="modal-header">
+        <h6 class="modal-title pull-left">Set Community User Status</h6>
+        <button class="close pull-right" aria-label="Close" (click)="onCloseModal(null)" [disabled]="spinner">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form role="form" #f="ngForm" (submit)="f.form.valid && onSubmit(f)" novalidate>
+        <div class="modal-body">
+            <label>Status<span class="required-field"> *</span></label>
+            <select class="form-control form-control-sm" [(ngModel)]="statusObj.id" name="status" #status="ngModel"
+                    required tabindex="1" [focuMe]="true">
+                <option [ngValue]="null" disabled>Set a Status</option>
+                <option [value]="status.key"
+                        *ngFor="let status of statusList">{{status.value}}</option>
+            </select>
+            <div *ngIf="status.invalid && (f.submitted || status.dirty || status.touched)"
+                 class="required-alert alert alert-danger">
+                <span *ngIf="status.errors?.required">This field is required.</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-sm btn-success" [disabled]="spinner"><span
+                class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="spinner"></span>
+                Save
+            </button>
+            <button type="button" (click)="onCloseModal(null);" class="btn btn-sm btn-secondary" [disabled]="spinner">
+                Close
+            </button>
+        </div>
+    </form>
+</div>

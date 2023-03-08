@@ -1,0 +1,132 @@
+
+
+        <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                  
+                                <div class="col-md-4">
+                                    <form role="form" (ngSubmit)="calculate(f)" #f="ngForm">
+                                          <div class="input-group mb-3">
+                                                  <!-- <span class="input-group-addon"><i class="icon-user"></i></span> -->
+                                                  <input type="text" class="form-control" placeholder="Total Loan"
+                                                         required
+                                                         [(ngModel)]="loanReq.totalLoan" name="totalLoan" #totalLoan="ngModel">
+                                                  <div *ngIf="totalLoan.invalid && (f.submitted || totalLoan.dirty || totalLoan.touched)" class="required-alert alert alert-danger">
+                                                    <span *ngIf="totalLoan.errors.required">
+                                                      This field is required.
+                                                    </span>
+                                                  </div>
+                                          </div>
+                          
+                                          <div class="input-group mb-3">
+                                            <!-- <span class="input-group-addon"><i class="icon-user"></i></span> -->
+                                            <input type="text" class="form-control" placeholder="Term of Loan"
+                                                   required
+                                                   [(ngModel)]="loanReq.termOfLoan" name="termOfLoan" #termOfLoan="ngModel">
+                                            <div *ngIf="termOfLoan.invalid && (f.submitted || termOfLoan.dirty || termOfLoan.touched)" class="required-alert alert alert-danger">
+                                              <span *ngIf="termOfLoan.errors.required">
+                                                This field is required.
+                                              </span>
+                                            </div>
+                                          </div>
+                          
+                                          <div class="input-group mb-3">
+                                              <!-- <span class="input-group-addon"><i class="icon-user"></i></span> -->
+                                              <input type="text" class="form-control" placeholder="Interest Rate"
+                                                     required
+                                                     [(ngModel)]="loanReq.interestRate" name="interestRate" #interestRate="ngModel">
+                                              <div *ngIf="interestRate.invalid && (f.submitted || interestRate.dirty || interestRate.touched)" class="required-alert alert alert-danger">
+                                                <span *ngIf="totalLoan.errors.required">
+                                                  This field is required.
+                                                </span>
+                                              </div>
+                                          </div>
+    
+                                          <div class="row">
+                                              <div class="col-md-4">
+                                                    <button type="button" class="btn btn-primary px-4"  (click)='clear()'>Clear</button>
+                                              </div>
+                                              <div class="col-md-4">
+                                              </div>
+                                              <div class="col-md-4">
+                                                    <button type="submit" class="btn btn-primary px-4" >Calculate</button>
+                                              </div>
+                                          </div>
+                                  </form>
+                          
+                                </div>  
+                                <div class="col-md-4">   
+                                </div>  
+                                <div class="col-md-4">  
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <div class="row">
+                                          <label><b>Initial Monthly Payment:</b></label>
+                                      </div>
+                                      <div class="row">
+                                          <label><b>Total Payment:</b></label>
+                                      </div>
+                                      <div class="row">
+                                          <label><b>Interest:</b></label>
+                                      </div>
+    
+                                    </div>
+    
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <label>{{loanAdvanceInfo.monthlyRePayment | number : '1.2-2'}}</label>
+                                        </div>
+                                        <div class="row">
+                                            <label>{{loanAdvanceInfo.totalValue | number : '1.2-2'}}</label>
+                                        </div>
+                                        <div class="row">
+                                            <label>{{loanAdvanceInfo.totalInterest | number : '1.2-2'}}</label>
+                                        </div>
+      
+                                      </div>
+                                  </div>
+    
+                                </div>  
+    
+                            </div>
+                        </div>
+                    </div>          
+                </div>
+            </div>    
+    
+    
+    
+    
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <table class="table">
+                                    <tr>
+                                      <th>No of Installments</th>
+                                      <th>Capital Paid</th>
+                                      <th>Interest Paid</th>
+                                      <th>Monthly Installment</th>
+                                      <th>Starting Balance</th>
+                                      <th>New Balance</th>
+                                    </tr>
+                                    <tbody>
+                                        <tr *ngFor="let record of loanAdvanceInfo.monthWisePayments; let i = index">
+                                            <td>{{record.month || 'N/A'}}</td>
+                                            <td>{{record.principlePaid | number : '1.2-2' || 'N/A'}}</td>
+                                            <td>{{record.interestPaid | number : '1.2-2' || 'N/A'}}</td>
+                                            <td>{{record.rePayment | number : '1.2-2'|| 'N/A'}}</td>
+                                            <td>{{record.startingBalance| number : '1.2-2' || 'N/A'}}</td>
+                                            <td>{{record.newBalance | number : '1.2-2'|| 'N/A'}}</td>
+                                          </tr>
+                                    </tbody>
+                                    </table>
+                            </div>
+                        </div>
+                    </div>          
+                </div>
+            </div>    
+    

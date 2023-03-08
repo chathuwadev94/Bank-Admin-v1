@@ -1,0 +1,35 @@
+<div ngDraggable [handle]="DemoHandle" class="animated fadeIn modal-draggable">
+    <div #DemoHandle class="modal-header">
+        <h6 class="modal-title pull-left">Remove User</h6>
+        <button class="close pull-right" aria-label="Close" (click)="onCloseModal(null)" tabindex="4"
+                [disabled]="spinner">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+        <div class="modal-body">
+
+                <div class="card">
+                        <div class="card-header">
+                            <span class="nameSpan">Basic Information</span>
+                        </div>
+                        <div class="card-body">
+                                <div class="row">
+                                    <dt class="col-5">First Name</dt>
+                                    <dd class="col-7">: {{userObj.firstName}}</dd>
+                                    <dt class="col-5">Last Name</dt>
+                                    <dd class="col-7">: {{userObj.lastName}}</dd>
+                                </div>
+                            </div>
+                    </div>
+           
+        </div>
+        <div class="modal-footer">
+            <button (click)="onClickRemove()" class="btn btn-sm btn-success" [disabled]="spinner" tabindex="2"  > 
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                      *ngIf="spinner" (click)="onClickRemove()"></span> Remove
+            </button>
+            <button type="button" (click)="onCloseModal(null);" class="btn btn-sm btn-secondary" tabindex="3"
+                    [disabled]="spinner">Close
+            </button>
+        </div>
+</div>

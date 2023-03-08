@@ -1,0 +1,83 @@
+<div ngDraggable [handle]="DemoHandle" class="animated fadeIn modal-draggable">
+    <div #DemoHandle class="modal-header">
+        <h6 class="modal-title pull-left">User Details</h6>
+        <button class="close pull-right" aria-label="Close" (click)="onCloseModal({})">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-6 mb-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="nameSpan">Basic Information</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <dt class="col-5">First Name</dt>
+                                <dd class="col-7">: {{userDetail.firstName}}</dd>
+                                <dt class="col-5">Last Name</dt>
+                                <dd class="col-7">: {{userDetail.lastName}}</dd>
+                                <dt class="col-5">Address</dt>
+                                <dd class="col-7">: {{userDetail.address}}</dd>
+                                <dt class="col-5">Gender</dt>
+                                <dd class="col-7">: {{userDetail.gender === 'M' ? 'Male' : 'Female'}}</dd>
+                                <dt class="col-5">NIC</dt>
+                                <dd class="col-7">: {{userDetail.NIC || 'N/A'}}</dd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="nameSpan">Contact Details</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <dt class="col-5">Mobile</dt>
+                                <dd class="col-7">: {{userDetail.mobile}}</dd>
+                                <dt class="col-5">Telephone</dt>
+                                <dd class="col-7">: {{userDetail.contact || 'N/A'}}</dd>
+                                <dt class="col-5">Email</dt>
+                                <dd class="col-7">:{{userDetail.email}}</dd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="nameSpan">Audit Details</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <dt class="col-5">Created Date</dt>
+                                <dd class="col-7">: {{userDetail.created_date}}</dd>
+                                <dt class="col-5">Status</dt>
+                                <dd class="col-7">: {{userDetail.isActive || 'N/A' | statusConfig}}</dd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-1">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="nameSpan">Login Details</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <dt class="col-5">Login Name</dt>
+                                <dd class="col-7">: {{userDetail.username}}</dd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" (click)="onCloseModal({});" class="btn btn-sm btn-secondary">Close</button>
+    </div>
+</div>

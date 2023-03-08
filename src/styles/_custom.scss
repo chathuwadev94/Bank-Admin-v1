@@ -1,0 +1,542 @@
+// Here you can add other styles
+
+/*New Core UI Customize By MC Start*/
+body{
+  font-size: 0.8rem;
+}
+
+button, a {
+    outline: none !important;
+}
+
+
+.sidebar .nav-item.nav-dropdown.active:not(.open) > .nav-link:not(:hover){
+  background-color: #33444c;
+  color: #536c79;
+}
+
+.imageItem1 {
+  max-height: 230px;
+  overflow: hidden;
+}
+
+.sidebar .nav-link:hover:not(.active),
+.sidebar .navbar .dropdown-toggle:hover:not(.active),
+.navbar .sidebar .dropdown-toggle:hover:not(.active){
+  background: #33444c;
+}
+
+.lightbox {
+  .lb-close {
+    position: absolute;
+    right: 40px;
+    top: 0;
+  }
+}
+
+.sidebar .nav-link.active,
+.sidebar .navbar .active.dropdown-toggle,
+.navbar .sidebar .active.dropdown-toggle {
+  color: #fff;
+  background: #20a8d8;
+}
+
+.no-breadcrumb{
+  padding-top: 15px;
+}
+
+.table {
+  thead th{
+    font-size: 0.75rem;
+    vertical-align: middle;
+  }
+
+  tr.collapsing > td,
+  tr.collapse > td{
+    padding-left: 3.5rem;
+  }
+
+  td{
+    font-size: 0.7rem;
+    vertical-align: middle;
+    input[type=checkbox],
+    input[type=radio]{
+      position: static;
+    }
+  }
+
+  .btn{
+    padding: .1rem .3rem;
+    font-size: .7rem;
+    line-height: 1.5;
+  }
+
+  //:not(th) .form-control{
+  //  height: 1.5rem;
+  //}
+}
+
+.modal-header,
+.modal-footer{
+  padding: 0.75rem 1rem;
+}
+
+.noTabContent > .tab-content > tab{
+  padding: 0;
+}
+
+.form-group-xs{
+  margin-bottom: 0.25rem;
+}
+
+span.form-control{
+  background-color: #f3f3f3;
+}
+
+.card-xs{
+  margin-bottom: 1rem;
+  .card-header{
+    padding: 0.35rem 1.25rem;
+    .nameSpan{
+      line-height: 1;
+      margin: 0;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+  }
+  .card-body{
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+span.badge-pill[class*=' orderStatus']{
+  background-color: #fefefe;
+  font-size: 0.75rem;
+}
+
+.orderStatus-01 {
+  color: #0050ef;
+}
+
+.orderStatus-02 {
+  color: #6a00ff;
+}
+
+.orderStatus-03 {
+  color: #d80073;
+}
+
+.orderStatus-04 {
+  color: #fa6800;
+}
+
+.orderStatus-05 {
+  color: #008a00;
+}
+
+.orderSectionStatus-01 {
+  color: #e51400;
+  font-weight: 700;
+}
+
+.orderSectionStatus-02 {
+  color: #fa6800;
+  font-weight: 700;
+}
+
+.orderSectionStatus-03 {
+  color: #a4c400;
+  font-weight: 700;
+}
+
+.orderSectionStatus-04 {
+  color: #008a00;
+  font-weight: 700;
+}
+
+span.form-control:not([class*=' orderSectionStatus']){
+  color: #0000cc;
+}
+
+.paginationSpan{
+  line-height: 1.7rem;
+  color: #0275d8;
+}
+
+@media (max-width: 1359px) {
+  body{
+    overflow-x: auto;
+  }
+
+  .app-body{
+    display: inline-block;
+    overflow-x: visible;
+    margin-bottom: 35px;
+  }
+
+  main, .card,
+  app-data-grid{
+    //display: inline-block;
+    min-width: 100%;
+  }
+
+  footer.app-footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+.pac-container {
+  z-index: 1051 !important;
+}
+
+.form-control-FontFix{
+  b{
+    font-size: 0.9rem;
+    line-height: 1.2rem;
+  }
+}
+/*New Core UI Customize By MC End*/
+
+
+.notifications {
+  i {
+    font-size: 17px;
+  }
+  span {
+    width: 15px;
+    height: 15px;
+    font-size: 9px;
+    line-height: 15px;
+    top: -5px;
+    left: 10px;
+  }
+}
+
+
+
+#toast-container>div {
+  border-radius: 0px;
+}
+
+#toast-container>:hover {
+  box-shadow: 0 0 12px #818080;
+}
+
+#fullScreenElement:-webkit-full-screen {
+  width: 100%;
+  height: 100%;
+  padding-top: 10px;
+  margin: 0;
+}
+
+.app-header.navbar {
+  background-color: #33444c!important;
+}
+
+.app-header.navbar .navbar-brand {
+  background-color: #33444c;
+}
+
+.app-header.navbar {
+  border-bottom: 1px solid #212b31;
+}
+
+.app-header.navbar .navbar-brand {
+  border-bottom: 1px solid #212b31;
+}
+
+.navbar-toggler {
+  &:hover .navbar-toggler-icon {
+    background-image: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#e4e5e6' stroke-width='2.25' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"), "#", "%23")!important;;
+  }
+}
+
+.navbar-toggler-icon {
+  background-image: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#ffffff' stroke-width='2.25' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"), "#", "%23")!important;
+}
+
+.navbar-nav .nav-link, .navbar-nav .navbar .dropdown-toggle, .navbar .navbar-nav .dropdown-toggle {
+  color: #ffffff;
+}
+
+@media (min-width: 992px) {
+  .brand-minimized .app-header.navbar .navbar-brand {
+    background-color: #33444c;
+    background-image: none;
+    background-size: 24px;
+    border-bottom: 1px solid #212b31;
+  }
+}
+
+.navbar-nav .nav-link:focus, .navbar-nav .navbar .dropdown-toggle:focus, .navbar .navbar-nav .dropdown-toggle:focus, .navbar-nav .nav-link:hover, .navbar-nav .navbar .dropdown-toggle:hover, .navbar .navbar-nav .dropdown-toggle:hover {
+  color: #e4e5e6;
+}
+
+@media (min-width: 1300px){
+  .modal-lg {
+    max-width: 1300px !important;
+    width: 1300px !important;
+  }
+}
+
+.form-model .modal-header{
+  background-color: #f0f3f5;
+}
+
+.form-model .card {
+  margin-bottom: 0rem;
+}
+
+.required-field{
+  color: red;
+}
+
+.required-alert {
+  padding: 0.1rem 0.75rem;
+  margin-bottom: 0rem;
+  font-size: 0.775rem;
+}
+
+.view-data .text-align {
+  text-align: right !important;
+}
+
+@media (max-width: 576px){
+  .view-data .text-align {
+    text-align: left !important;
+  }
+}
+
+.bs-datepicker {
+  z-index: 1500;
+}
+
+.close-btn-circle {
+  width: 35px;
+  height: 35px;
+  padding: 3px 0;
+  border-radius: 18px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.428571429;
+}
+
+.nav-tabs .nav-link {
+  font-weight: 600;
+}
+
+.login-page-bg-primary{
+  background-color: #33444c!important;
+}
+
+.modal-date-input .form-control[readonly]{
+  background-color: white;
+}
+
+.navbar-nav .open > .nav-link,.navbar-nav .open > .nav-link:hover,.navbar-nav .open > .nav-link:focus{
+  color: #ffffff;
+}
+
+.ng-select.ng-single .ng-control {
+  height: 30px !important;
+  width: 100% !important;
+  padding: 0.25rem 0.5rem !important;
+  font-size: 0.765625rem !important;
+  line-height: 1.5 !important;
+  color: #3e515b !important;
+  background-color: #fff !important;
+  background-clip: padding-box !important;
+  border: 1px solid #c2cfd6 !important;
+  border-radius: 0 !important;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+}
+
+.ng-dropdown-panel.bottom {
+  border-radius: 0;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  padding: 0.25rem 0.5rem;
+}
+
+.ng-select .ng-control {
+  min-height: 30px !important;
+}
+
+.custom-list-group li{
+  display: block;
+  float: left;
+  margin-right: 0px;
+  width: 100%;
+  line-height: 25px;
+}
+
+.ng-select .ng-select-container {
+  border-radius: 0px;
+  min-height: 30px;
+  font-size: 0.765625rem;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+  height: 30px;
+}
+
+/*MC Theme Styles Update Start*/
+.adjUsername{
+  position: relative;
+  right: 5px;
+}
+
+.adjUsername.active{
+  bottom: 5px;
+}
+
+.app-footer{
+  font-size: 12px;
+  flex: 0 0 30px;
+}
+
+.sidebar .nav-link,
+.sidebar .navbar .dropdown-toggle,
+.navbar .sidebar .dropdown-toggle{
+  font-size: 12px;
+  padding: 0.75rem 0.25rem;
+  font-weight: 500;
+}
+
+.sidebar .nav-link.active i,
+.sidebar .navbar .active.dropdown-toggle i,
+.navbar .sidebar .active.dropdown-toggle i{
+  color: #fff;
+}
+
+.sidebar .nav-dropdown.open {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.sidebar .nav-title{
+  padding: 0.75rem 1rem 0 0.7rem;
+}
+
+.sidebar .nav-item.nav-dropdown .nav-dropdown-items .nav-link{
+  padding: 0.75rem 0.25rem 0.75rem 0.75rem;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active{
+  border-color: #a4b7c1 #a4b7c1 #fff !important;
+}
+
+.nav-tabs .nav-link:focus:not(.active),
+.nav-tabs .nav-link:hover:not(.active){
+  border-color: #e9ecef #e9ecef #a4b7c1 !important;
+}
+
+.form-group-checkbox .form-check-input{
+  position: relative;
+  bottom: 1px;
+  margin: 0 0.5rem 0 0;
+}
+
+.card .card-header .btn,
+.card .card-header .btn-sm{
+  margin-top: 0;
+}
+
+.userViewImage{
+  width:200px;
+  height:200px;
+  border-radius: 50%;
+  background-position: 50% 50%;
+  margin: 0 auto 15px auto;
+  border: 1px solid #ccc;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.userThumb{
+  width:40px;
+  height:40px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  background-position: 50% 50%;
+}
+
+.no-margin{
+  margin: 0!important;
+}
+
+label{
+  margin-bottom: 0 !important;
+  font-size: 0.8rem;
+}
+
+.alert{
+  padding: 0.1rem 0.35rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.dropdown-item{
+  padding: 8px 20px !important;
+  font-size: 0.8rem;
+}
+
+.dropdown-item{
+  border-bottom: none;
+  color: #222;
+  i{
+    color: #222;
+  }
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus{
+  background-color: #a4b7c1;
+}
+
+/*MC Theme Styles Update End*/
+
+input:disabled {
+  cursor: not-allowed;
+}
+
+.dropdown-menu.popMenuUp{
+  top: auto !important;
+  bottom: 100% !important;
+}
+
+.filter-dropdown .dropdown-menu.popMenuLeft{
+  left: auto !important;
+  right: 0 !important;
+}
+
+/* Transport requests styles start */
+.item-list {
+  .card-header {
+    padding: 0;
+    border-bottom: none;
+    cursor: pointer;
+    .btn-link {
+      color: #3c6783;
+      font-weight: 600;
+    }
+  }
+
+  img {
+    max-height: 160px;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+/* Transport requests styles end */
+
+.unread {
+  background-color: rgba(0, 255, 0, 0.3) !important;
+  font-weight: 700;
+}

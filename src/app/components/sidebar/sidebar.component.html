@@ -1,0 +1,39 @@
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
+    <div class="list-group" *ngFor="let item of gVariable.navigationMenu">
+        <li *ngIf="isTitle(item)" class="sidebar-title">{{item.name}}</li>
+        <li *ngIf="isDivider(item)" class="dropdown-divider"></li>
+        <ng-template [ngIf]="!isDivider(item)&&!isTitle(item)">
+            <a *ngIf="!isDropdown(item); else dropdown" routerLink="{{item.url}}"
+               [routerLinkActive]="['router-link-active']"
+               class="list-group-item">
+                <i [ngClass]="item.icon"></i>
+                <span class="px-1 text-uppercase">{{ item.name | translate }}</span>
+            </a>
+            <ng-template #dropdown>
+                <div class="nested-menu" [class.open]="showMenu === item.name">
+                    <a class="list-group-item" (click)="addExpandClass(item.name)">
+                        <i [ngClass]="item.icon"></i>
+                        <span class="px-1 text-uppercase">{{ item.name | translate }}</span>
+                    </a>
+                    <li class="nested" [class.expand]="showMenu === item.name">
+                        <ul class="submenu p-0 m-0" *ngFor="let children of item.children">
+                            <li *ngIf="isTitle(children)" class="sidebar-title">{{children.name}}</li>
+                            <li *ngIf="isDivider(children)" class="dropdown-divider"></li>
+                            <li>
+                                <a class="list-group-item" *ngIf="!isDivider(children)&&!isTitle(children)" href="javascript:void(0)"
+                                   routerLink="{{children.url}}">
+                                    <i [ngClass]="children.icon"></i>
+                                    <span>{{ children.name | translate }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </div>
+            </ng-template>
+        </ng-template>
+    </div>
+    <div class="toggle-button d-flex" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">
+        <i class="fa fa-fw fa-angle-double-{{collapsed?'right':'left'}}"></i>
+        <span class="mt-1">{{ 'Collapse Sidebar' | translate }}</span>
+    </div>
+</nav>

@@ -1,0 +1,64 @@
+<div ngDraggable [handle]="DemoHandle" class="animated fadeIn modal-draggable">
+
+    <div #DemoHandle class="modal-header">
+        <h6 class="modal-title pull-left">{{action === 'add_accType' ? 'Create Account Type' : 'Edit Account Type'}}</h6>
+        <button class="close pull-right" aria-label="Close" (click)="onCloseModal(null)" type="button"
+                [disabled]="spinner" tabindex="15">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <form [formGroup]="formGroup" novalidate *ngIf="formGroup" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="nameSpan">Account Type Information</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                    <div class="col-md-6">
+                                            <div class="form-group form-group-sm">
+                                                    <label>Account Type Name :<span class="required-field">*</span></label>
+                                                    <input type="text" class="form-control form-control-sm" tabindex="1"
+                                                           formControlName="name" id="name" [focuMe]="true" />
+                                                    <div class="alert alert-danger required-alert"
+                                                         *ngIf="formGroup.controls['name'].touched && formGroup.controls['name'].hasError('required')">
+                                                        This field is required
+                                                    </div>
+                                            </div>
+                                     </div>
+                                    <div class="col-md-6">
+                                            <div class="form-group form-group-sm">
+                                                <label>Account TR Type<span class="required-field">*</span></label>
+                                                <select class="form-control form-control-sm" formControlName="accTrType"
+                                                        tabindex="4">
+                                                    <option [ngValue]="null" disabled>Select a Account Transaction Type</option>
+                                                    <option [ngValue]="accTrType.value"
+                                                            *ngFor="let accTrType of AccTrTypes">{{accTrType.key}}</option>
+                                                </select>
+                                                <div class="alert alert-danger required-alert"
+                                                *ngIf="formGroup.controls['accTrType'].touched && formGroup.controls['accTrType'].hasError('required')">
+                                               This field is required
+                                           </div>
+                                            </div>
+                                     </div>
+                                </div>
+                        </div>
+                    </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-sm btn-success" [disabled]="spinner" tabindex="13">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="spinner"></span>
+                {{action == "add_accType" ? "Create" : "Save"}}
+            </button>
+            <button type="button" (click)="onCloseModal(null);" class="btn btn-sm btn-secondary" [disabled]="spinner"
+                    tabindex="14">Cancel
+            </button>
+        </div>
+    </form>
+
+</div>

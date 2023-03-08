@@ -1,0 +1,79 @@
+<div ngDraggable [handle]="DemoHandle"  class="animated fadeIn modal-draggable">
+    <div #DemoHandle class="modal-header" >
+        <h6 class="modal-title pull-left">Community User Details</h6>
+        <button class="close pull-right"aria-label="Close" (click)="onCloseModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6 mb-1">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="nameSpan">Basic Information</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <dt class="col-5">First Name</dt>
+                            <dd class="col-7">: {{communityUserObj.first_name}}</dd>
+                            <dt class="col-5">Country</dt>
+                            <dd class="col-7">: {{communityUserObj.country || 'N/A'}}</dd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-1">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="nameSpan">Contact Details</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <dt class="col-5">Mobile</dt>
+                            <dd class="col-7">: {{communityUserObj.mobile || 'N/A'}}</dd>
+                            <dt class="col-5">Email</dt>
+                            <dd class="col-7">:{{communityUserObj.email || 'N/A'}}</dd>
+                            <dt class="col-5">E mail Confirmed</dt>
+                            <dd class="col-7">: {{communityUserObj.email_confirmed || 'N/A'}}</dd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-1">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="nameSpan">Audit Details</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <dt class="col-5">Created Date</dt>
+                            <dd class="col-7">: {{communityUserObj.created_date}}</dd>
+                            <dt class="col-5">Status</dt>
+                            <dd class="col-7">: {{communityUserObj.status || 'N/A' | statusConfig}}</dd>
+                            <dt class="col-5">Chanel</dt>
+                            <dd class="col-7">: {{communityUserObj.channel}}</dd>
+                            <dt class="col-5">Last login</dt>
+                            <dd class="col-7">: {{communityUserObj.created_date}}</dd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-1">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="nameSpan">Login Details</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <dt class="col-5">Login Name</dt>
+                            <dd class="col-7">: {{communityUserObj.username}}</dd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" (click)="onCloseModal();" class="btn btn-sm btn-secondary">Close</button>
+    </div>
+</div>

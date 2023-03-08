@@ -1,0 +1,33 @@
+<div ngDraggable [handle]="DemoHandle" class="animated fadeIn modal-draggable">
+    <div #DemoHandle class="modal-header">
+        <h6 class="modal-title pull-left">Set User Roles</h6>
+        <button class="close pull-right" aria-label="Close" (click)="onCloseModal(null)" tabindex="4"
+                [disabled]="spinner">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form role="form" #f="ngForm" (submit)="f.form.valid && onSubmit(f)" novalidate>
+        <div class="modal-body">
+            <label>Roles<span class="required-field"> *</span></label>
+            <select class="form-control form-control-sm" [(ngModel)]="roleObj.id" name="roles" #roles="ngModel"
+                    required tabindex="1" [focuMe]="true">
+                <option [ngValue]="null" disabled>Set a Role</option>
+                <option [ngValue]="roles.key"
+                        *ngFor="let roles of rolesList">{{roles.value}}</option>
+            </select>
+            <div *ngIf="roles.invalid && (f.submitted || roles.dirty || roles.touched)"
+                 class="required-alert alert alert-danger">
+                <span *ngIf="roles.errors?.required">This field is required.</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-sm btn-success" [disabled]="spinner" tabindex="2">
+                <span class="spinner-border spinner-border-sm" role="roles" aria-hidden="true"
+                      *ngIf="spinner"></span> Save
+            </button>
+            <button type="button" (click)="onCloseModal(null);" class="btn btn-sm btn-secondary" tabindex="3"
+                    [disabled]="spinner">Close
+            </button>
+        </div>
+    </form>
+</div>

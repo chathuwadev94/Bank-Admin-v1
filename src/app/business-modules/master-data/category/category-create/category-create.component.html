@@ -1,0 +1,89 @@
+<div ngDraggable [handle]="DemoHandle" class="animated fadeIn modal-draggable">
+    <div #DemoHandle class="modal-header">
+        <h6 class="modal-title pull-left">{{action === 'add_category' ? 'Add New Category' : 'Edit Category'}}</h6>
+        <button class="close pull-right" aria-label="Close" (click)="onCloseModal(null)" type="button"
+                [disabled]="spinner" tabindex="7">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form role="form" #f="ngForm" (submit)="f.form.valid && onSubmit(f)" novalidate>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="nameSpan">Basic Information</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group form-group-sm">
+                                            <label>Name<span class="required-field">*</span></label>
+                                            <input type="text" class="form-control form-control-sm" [focuMe]="true"
+                                                   [(ngModel)]="categoryObj.name" name="name" #name="ngModel" id="name"
+                                                   required tabindex="1"/>
+                                            <div *ngIf="name.invalid && (f.submitted || name.dirty || name.touched)"
+                                                 class="required-alert alert alert-danger">
+                                                <span *ngIf="name.errors?.required">This field is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group form-group-sm">
+                                            <label>Domain<span class="required-field">*</span></label>
+                                            <select class="form-control form-control-sm"
+                                                    [(ngModel)]="categoryObj.domain_id"
+                                                    name="domain_id" #domain_id="ngModel" required tabindex="2">
+                                                <option [ngValue]="null" disabled>Select a Domain</option>
+                                                <option [ngValue]="domain.key"
+                                                        *ngFor="let domain of domainList">{{domain.value}}</option>
+                                            </select>
+                                            <div
+                                                *ngIf="domain_id.invalid && (f.submitted || domain_id.dirty || domain_id.touched)"
+                                                class="required-alert alert alert-danger">
+                                                <span *ngIf="domain_id.errors?.required">This field is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group form-group-sm">
+                                            <label>Description<span class="required-field">*</span></label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                   id="description" [(ngModel)]="categoryObj.description" required
+                                                   name="description" #description="ngModel" tabindex="3"/>
+                                            <div
+                                                *ngIf="description.invalid && (f.submitted || description.dirty || description.touched)"
+                                                class="required-alert alert alert-danger">
+                                                <span
+                                                    *ngIf="description.errors?.required">This field is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group form-group-sm">
+                                            <label>Image</label>
+                                            <app-image-upload [imageUrl]="categoryObj.icon" tabindex="4"
+                                                              [config]="fileUploadCategoryConfig"
+                                                              (onFileUploadEvent)="onCategoryUpload($event)"></app-image-upload>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-sm btn-success" [disabled]="spinner" tabindex="5">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="spinner"></span>
+                {{action == "edit_category" ? "Save" : "Create"}}
+            </button>
+            <button type="button" (click)="onCloseModal(null);" class="btn btn-sm btn-secondary" [disabled]="spinner"
+                    tabindex="6">Cancel
+            </button>
+        </div>
+    </form>
+</div>
+

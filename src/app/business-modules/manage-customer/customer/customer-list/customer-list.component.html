@@ -1,0 +1,38 @@
+<div class="animated fadeIn" >
+        <div class="card">
+            <div class="card-header">
+                    <div class="row">
+                            <div class="col-md-4">
+                                    <span class="nameSpan float-left"><i class="fa fa-align-justify"></i> Customer</span>
+                             </div>
+                             <div class="col-md-4">
+                                 <div class="row">
+                                        <div class="col-md-6">
+                                                <input type="text" placeholder="NIC Number" [(ngModel)]="searchObj.value" class="form-control form-control-sm" tabindex="3"/>
+                                        </div>
+                                        <div class="col-md-3">
+                                                <button  class="btn btn-sm btn-primary mr-1" type="button"
+                                                (click)="onClickSearchBtn()">Search</button>
+                                        </div>
+                                        <div class="col-md-3">
+                                                <button  class="btn btn-info btn-sm mr-1" type="button" 
+                                                (click)="onClickClearBtn()">Clear  </button>
+                                        </div>
+                                 </div>
+                                 
+                             </div>
+                             <div class="col-md-4">
+                                    <div class="form-inline float-right">
+                                            <button *ngIf="this.role==1" class="btn btn-sm btn-primary" type="button"
+                                                    (click)="onClickAddBtn()">Add New</button>
+                                    </div>
+                             </div>
+                    </div>
+            </div>
+            <div class="card-body">
+                <app-data-grid [gridOnChangeTime]="gridOnChangeTime" [gridEvent]="gridEvent" [gridConfig]="gridConfig"
+                               (onGridActionEvent)="onGridActionEvent($event)"></app-data-grid>
+            </div>
+        </div>
+    </div>
+    
